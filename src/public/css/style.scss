@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    .container {
+        margin: 0 0;
+    
+    
+    }
+
+    .form-control:focus {
+        box-shadow: 0 0 0 0.2rem rgba($color: #ff810c, $alpha: .35);
+        border-color: rgba($color: #ff810c, $alpha: .35);
+    }
+}

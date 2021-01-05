@@ -1,0 +1,13 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+* .form-control:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(255, 129, 12, 0.35);
+          box-shadow: 0 0 0 0.2rem rgba(255, 129, 12, 0.35);
+  border-color: rgba(255, 129, 12, 0.35);
+}
+/*# sourceMappingURL=style.css.map */

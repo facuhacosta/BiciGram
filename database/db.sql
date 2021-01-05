@@ -1,0 +1,63 @@
+CREATE DATABASE BiciGram;
+
+USE BiciGram;
+
+CREATE TABLE user (
+    id INT AUTO_INCREMENT,
+    username VARCHAR(15) NOT NULL UNIQUE,
+    pass VARCHAR(30) NOT NULL,
+    firstname VARCHAR(30) NOT NULL,
+    lastname VARCHAR(30) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    bike VARCHAR(30),
+    distance INT NOT NULL DEFAULT 0,
+
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE posts (
+    id INT AUTO_INCREMENT,
+    user INT NOT NULL UNIQUE,
+
+    title VARCHAR(20) NOT NULL,
+    img LONGBLOB,
+    content VARCHAR(200),
+    post_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY(id),
+    FOREIGN KEY (user) REFERENCES user(id) ON DELETE CASCADE
+);
+
+CREATE TABLE postsLikes (
+    user INT NOT NULL,
+    post INT NOT NULL,
+    likes TINYINT(1) DEFAULT NULL,
+
+    PRIMARY KEY(user,post),
+    FOREIGN KEY (user) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (post) REFERENCES posts(id) ON DELETE CASCADE
+);
+
+CREATE TABLE comments (
+    id INT AUTO_INCREMENT,
+    parent INT NOT NULL,
+    user INT NOT NULL,
+    post INT NOT NULL,
+    content VARCHAR(200) NOT NULL,
+    comment_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (user) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (parent) REFERENCES comments(id) ON DELETE CASCADE,
+    FOREIGN KEY (post) REFERENCES posts(id) ON DELETE CASCADE
+);
+
+CREATE TABLE commentLikes (
+    user INT NOT NULL,
+    comment INT NOT NULL,
+    likes TINYINT(1) DEFAULT NULL,
+
+    PRIMARY KEY(user,comment),
+    FOREIGN KEY (user) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (comment) REFERENCES comments(id) ON DELETE CASCADE
+);
