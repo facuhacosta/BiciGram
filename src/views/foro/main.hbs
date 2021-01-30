@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+
+        {{#each posts}}
+            <div class="col-md-12 col-lg-12 mt-2">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <a href="/foro/{{id}}">
+                            <h3 class="card-title text-upercase">{{title}}</h3>
+                        </a>
+                        <p>{{timeago post_date}}</p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

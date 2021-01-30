@@ -1,0 +1,38 @@
+<h1>{{post.title}}</h1>
+<p>{{post.content}}</p>
+{{#if user}}
+    <form action="/foro/{{post.id}}" method="POST" id="form0">
+        <textarea name="content" cols="30" rows="10"></textarea>
+        <button type="submit" form="form0">Comment</button>
+    </form>
+{{/if}}
+{{#each comments}}
+    <blockquote>
+        <p>{{userData.username}}</p><span>{{timeago post_date}}</span>
+        <p>{{content}}</p>
+    </blockquote>
+    {{#each replys}}
+        <blockquote>
+            <p>{{userData.username}}</p><span>{{timeago post_date}}</span>
+            <p>{{content}}</p>
+        </blockquote>    
+    {{/each}}
+    {{#if ../user}}
+        <form action="/foro/{{post.id}}" method="POST" id="form0">
+            <textarea name="content" cols="30" rows="10"></textarea>
+            <input type="hidden" name="parent" value="{{id}}">
+            <button type="submit" form="form0">Reply</button>
+        </form>
+    {{/if}}
+
+
+{{!--     ADD AN SCRIPT TO CHANGE THE PARENT VALUE DEPENDING ON THE COMMENT THE USER IS ANSWERING --}}
+
+{{!--         {{#if user}}
+            <form action="/foro/{{post.id}}" method="POST" id="form0">
+                <input type="hidden" name="parent" value="{{parent}}">
+                <textarea name="content" cols="30" rows="10"></textarea>
+                <button type="submit" form="form0">Respond</button>
+            </form>
+        {{/if}} --}}
+{{/each}}

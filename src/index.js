@@ -9,6 +9,7 @@ const MySQLStore = require('express-mysql-session')(session);
 const { nextTick } = require('process');
 const { database } = require('./keys');
 const passport = require('passport');
+const cookieParser = require('cookie-parser');
 
 /* initializations */
 require('./lib/passport');
@@ -31,15 +32,14 @@ app.set('view engine', '.hbs');
 app.use(flash());
 app.use(express.json({ type: 'text/html' }));
 app.use(express.urlencoded({ extended: false }));
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(cookieParser('Secreto'));
 app.use(session({
     secret: 'FacuBicigram',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
-    store: new MySQLStore(database)
 }));
-
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(morgan('dev'));
 

@@ -12,6 +12,7 @@ passport.use('local.login', new LocalStrategy({
     const rows = await pool.query('SELECT * FROM user WHERE username = ?', [username])
     if (rows.length > 0) {
         const user = rows[0];
+        
         const validPassword = await helpers.matchPassword(password, user.pass);
         if (validPassword) {
             done(null, user, req.flash('success','Welcome ' + user.username));

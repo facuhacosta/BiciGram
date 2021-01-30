@@ -17,7 +17,7 @@ CREATE TABLE user (
 
 CREATE TABLE posts (
     id INT AUTO_INCREMENT,
-    user INT NOT NULL UNIQUE,
+    user INT NOT NULL,
 
     title VARCHAR(20) NOT NULL,
     img LONGBLOB,
@@ -40,7 +40,7 @@ CREATE TABLE postsLikes (
 
 CREATE TABLE comments (
     id INT AUTO_INCREMENT,
-    parent INT NOT NULL,
+    parent INT,
     user INT NOT NULL,
     post INT NOT NULL,
     content VARCHAR(200) NOT NULL,
